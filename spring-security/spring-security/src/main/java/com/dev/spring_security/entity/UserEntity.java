@@ -17,6 +17,7 @@ public class UserEntity {
     @Column(name = "user_no")
     private Long id;
 
+    @Column(unique = true)
     private String username;
     private String password;
 

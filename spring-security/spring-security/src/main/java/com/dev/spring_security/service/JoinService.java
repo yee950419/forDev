@@ -17,6 +17,10 @@ public class JoinService {
     public void joinProcess(JoinDTO joinDTO) {
 
         // DB에 같은 사람이 존재하는지 검증, 이후 새로운 유저 생성
+        if(userRepository.existsByUsername(joinDTO.getUsername())) {
+
+            return;
+        }
 
         UserEntity newUser = UserEntity.builder()
                 .username(joinDTO.getUsername())
