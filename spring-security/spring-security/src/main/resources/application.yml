@@ -7,3 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: hak
     password: hak
+
+  jpa:
+    hibernate:
+      ddl-auto: none
