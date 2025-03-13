@@ -1,11 +1,10 @@
 package com.dev.spring_security.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Builder
+@AllArgsConstructor
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -23,11 +22,6 @@ public class UserEntity {
 
     private String role;
 
-    @Builder
-    public UserEntity(String username, String password, String role) {
-
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 }
+
+
