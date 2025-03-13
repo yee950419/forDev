@@ -15,3 +15,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+  mustache:
+    servlet:
+      expose-request-attributes: true

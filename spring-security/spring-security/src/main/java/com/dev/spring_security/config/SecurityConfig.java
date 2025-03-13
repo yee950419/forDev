@@ -36,8 +36,15 @@ public class SecurityConfig {
                         .loginProcessingUrl("/loginProc")
                         .permitAll());
 
-        http
-                .csrf((auth) -> auth.disable());    // 사이트 위변조방지설정 동작 시, post 요청은 csrf 토큰도 같이 보내줘야 로그인이 동작하므로, 임시적으로 비활성화
+        /*
+        * CSRF(Cross-Site-Request-Forgery) : 요청을 위조하여 사용자가 원하지 않아도 서버측으로 특정 요청을 강제로 보내는 방식
+        * csrf 설정이 enable 일 경우, 스프링 시큐리티는 CsrfFilter를 통해 POST, PUT, DELETE 요청에 대해서 토큰 검증을 진행한다.
+        * 기본값 : enable
+        *
+        * jwt 방식처럼 session을 stateless로 관리할 경우, csrf를 enable 설정하지 않아도 된다.
+        * */
+//        http
+//                .csrf((auth) -> auth.disable());    // 사이트 위변조방지설정 동작 시, post 요청은 csrf 토큰도 같이 보내줘야 로그인이 동작하므로, 임시적으로 비활성화
 
         http
                 .sessionManagement((auth) -> auth
