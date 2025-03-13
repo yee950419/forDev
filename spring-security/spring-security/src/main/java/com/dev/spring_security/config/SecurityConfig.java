@@ -2,9 +2,14 @@ package com.dev.spring_security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -32,9 +37,10 @@ public class SecurityConfig {
                         .anyRequest().authenticated());                             // 나머지 접근은 인증된 사용자만 접근 허용
 
         http
-                .formLogin((auth) -> auth.loginPage("/login").permitAll()   // 권한이 없는 page로 접근하였을 때, 자동으로 /login 경로로 redirect 시켜주는 설정
-                        .loginProcessingUrl("/loginProc")
-                        .permitAll());
+                .httpBasic(Customizer.withDefaults());
+//                .formLogin((auth) -> auth.loginPage("/login").permitAll()   // 권한이 없는 page로 접근하였을 때, 자동으로 /login 경로로 redirect 시켜주는 설정
+//                        .loginProcessingUrl("/loginProc")
+//                        .permitAll());
 
         /*
         * CSRF(Cross-Site-Request-Forgery) : 요청을 위조하여 사용자가 원하지 않아도 서버측으로 특정 요청을 강제로 보내는 방식
@@ -58,4 +64,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }
