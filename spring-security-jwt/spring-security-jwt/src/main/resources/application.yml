@@ -11,3 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+# jwt 암호화 용 시크릿 키 등록
+  jwt:
+    secret: sdlfkhsdfiosadjflkjsadlksdhfhlsidhfsdflkjsdfowiehfklsdjflksdjfmcsdomsdlfksdhofihsdlkfjsdlfhsidohflksdfmsdoifjosdlkmfklsdmfsdfsdfsdlkfsdhfoisdhfklsmefklwehoilsmcsdkfhsdkufhsdfkjskdlfhosdihfisodkfjweocowencwe
+
