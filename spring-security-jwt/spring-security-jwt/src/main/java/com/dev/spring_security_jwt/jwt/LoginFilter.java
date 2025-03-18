@@ -18,11 +18,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
+        System.out.println("LoginFilter attemptAuthentication");
+
         String username = obtainUsername(request);
         String password = obtainPassword(request);
-
-        System.out.println("username = " + username);
-        System.out.println("password = " + password);
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password, null);
 
@@ -32,12 +31,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
 
+        System.out.println("LoginFilter successfulAuthentication");
 
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
 
-
+        System.out.println("LoginFilter unsuccessfulAuthentication");
     }
 }

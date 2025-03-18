@@ -35,6 +35,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+        System.out.println("SecurityConfig securityFilterChain");
+
         // jwt 방식은 session을 stateless로 관리하기 때문에 csrf 공격에 대한 방어를 하지 않아도 무방
         http
                 .csrf((auth) -> auth.disable());
