@@ -3,6 +3,7 @@ package com.dev.spring_security_jwt.config;
 import com.dev.spring_security_jwt.jwt.JWTFilter;
 import com.dev.spring_security_jwt.jwt.JWTUtil;
 import com.dev.spring_security_jwt.jwt.LoginFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @Configuration
@@ -40,6 +46,25 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         System.out.println("SecurityConfig securityFilterChain");
+
+        http
+                .cors((cors) -> cors
+                        .configurationSource(new CorsConfigurationSource() {
+
+                            @Override
+                            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+
+                                CorsConfiguration configuration = new CorsConfiguration();
+                                configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                                configuration.setAllowedMethods(Collections.singletonList("*"));
+                                configuration.setAllowCredentials(true);
+                                configuration.setAllowedHeaders(Collections.singletonList("*"));
+                                configuration.setMaxAge(3600L);
+                                configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+
+                                return configuration;
+                            }
+                        }));
 
         // jwt 방식은 session을 stateless로 관리하기 때문에 csrf 공격에 대한 방어를 하지 않아도 무방
         http
