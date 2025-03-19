@@ -1,5 +1,6 @@
 package com.dev.spring_security_jwt.config;
 
+import com.dev.spring_security_jwt.jwt.JWTFilter;
 import com.dev.spring_security_jwt.jwt.JWTUtil;
 import com.dev.spring_security_jwt.jwt.LoginFilter;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +63,10 @@ public class SecurityConfig {
         // jwt 사용을 위한 커스텀 필터로 기존의 UsernamePasswordAuthenticationFilter를 대체
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+
+        // LoginFilter 이전에 JWTFilter가 작동하도록 적용
+        http
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
         // 세션 설정
         http
