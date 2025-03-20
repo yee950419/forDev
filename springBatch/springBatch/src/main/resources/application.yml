@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  datasource-meta:
+    jdbc-url: jdbc:mysql://localhost:3306/batch_meta?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: hak
+    password: hak
+
+  datasource-data:
+    jdbc-url: jdbc:mysql://localhost:3306/batch_data?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: hak
+    password: hak
+
+  batch:
+    job:
+      enabled: false  # 서버 시작 시 자동으로 배치 작업이 수행되지 않도록 설정
