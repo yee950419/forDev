@@ -17,3 +17,6 @@ spring:
   batch:
     job:
       enabled: false  # 서버 시작 시 자동으로 배치 작업이 수행되지 않도록 설정
+    jdbc:
+      initialize-schema: always # meta table 생성
+      schema: classpath:org/springframework/batch/core/schema-mysql.sql
