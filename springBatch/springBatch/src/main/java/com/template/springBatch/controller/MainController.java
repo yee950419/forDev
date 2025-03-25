@@ -18,13 +18,25 @@ public class MainController {
     private final JobRegistry jobRegistry;
 
     @GetMapping("/first")
-    public String firstApi(@RequestParam String value) throws Exception {
+    public String firstApi(@RequestParam String date) throws Exception {
 
         JobParameters jobParameters = new JobParametersBuilder()
-                .addString("date", value)
+                .addString("date", date)
                 .toJobParameters();
 
         jobLauncher.run(jobRegistry.getJob("firstJob"), jobParameters);
+
+        return "ok";
+    }
+
+    @GetMapping("/second")
+    public String secondApi(@RequestParam String date) throws Exception {
+
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addString("date", date)
+                .toJobParameters();
+
+        jobLauncher.run(jobRegistry.getJob("secondJob"), jobParameters);
 
         return "ok";
     }
